@@ -2,6 +2,7 @@
 
 import React, { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { supabase } from '@/lib/supabase/client';
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
@@ -9,14 +10,13 @@ const LoginPage = () => {
     const [error, setError] = useState('');
     const router = useRouter();
 
-    const handleLogin = (e: FormEvent<HTMLFormElement>) => {
+    const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // Simulate an API call for login
-        if (username === 'admin' && password === 'password') {
-            // Redirect to dashboard on successful login
+        const { error } = await supabase.auth.signInWithPassword({ email: username, password });
+        if (!error) {
             router.push('/admin');
         } else {
-            setError('Invalid username or password');
+            setError(error.message);
         }
     };
 
@@ -26,9 +26,9 @@ const LoginPage = () => {
             {error && <p className="error">{error}</p>}
             <form onSubmit={handleLogin}>
                 <div className="form-group">
-                    <label htmlFor="username">Username</label>
+                        <label htmlFor="username">Email address</label>
                     <input
-                        type="text"
+                        type="email"
                         id="username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}

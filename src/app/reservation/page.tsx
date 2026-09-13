@@ -11,7 +11,6 @@ const ReservationPage = () => {
 
     const handleReservationSubmit = (data: ReservationData) => {
         setReservationData(data);
-        localStorage.setItem('reservationData', JSON.stringify(data));
         alert('Reservation successful! We will contact you shortly.');
     };
 

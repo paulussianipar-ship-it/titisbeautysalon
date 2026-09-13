@@ -11,20 +11,16 @@ const Header: React.FC = () => {
     const [reservation, setReservation] = useState<{ name: string; phone: string; service: string; date: string; time: string } | null>(null);
 
     useEffect(() => {
-        const updateReservationStatus = () => {
-            const storedReservation = localStorage.getItem('reservation');
-            const nextReservation = storedReservation ? JSON.parse(storedReservation) : null;
+        const updateReservationStatus = (event?: Event) => {
+            const nextReservation = event instanceof CustomEvent ? event.detail : null;
             setReservation(nextReservation);
             setHasReservation(Boolean(nextReservation));
         };
 
-        updateReservationStatus();
         window.addEventListener('reservation-created', updateReservationStatus);
-        window.addEventListener('storage', updateReservationStatus);
 
         return () => {
             window.removeEventListener('reservation-created', updateReservationStatus);
-            window.removeEventListener('storage', updateReservationStatus);
         };
     }, []);
 

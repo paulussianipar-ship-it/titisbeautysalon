@@ -1,6 +1,8 @@
 'use client';
 
 import React, { FormEvent, useState } from 'react';
+import { supabase } from '@/lib/supabase/client';
+import { ServiceRecord } from '@/lib/services';
 
 type ReservationFormData = { name: string; email: string; phone: string; date: string; time: string; service: string };
 type ReservationFormProps = { onSubmit?: (data: ReservationFormData) => void };
@@ -31,9 +33,19 @@ const ReservationForm = ({ onSubmit }: ReservationFormProps) => {
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
     const [service, setService] = useState('');
+    const [services, setServices] = useState<ServiceRecord[]>([]);
     const [notification, setNotification] = useState('');
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    React.useEffect(() => {
+        const loadServices = async () => {
+            const { data } = await supabase.from('services').select('id, name, description, image, price').order('id');
+            setServices((data || []) as ServiceRecord[]);
+        };
+
+        void loadServices();
+    }, []);
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const reservation = {
             name,
@@ -43,8 +55,22 @@ const ReservationForm = ({ onSubmit }: ReservationFormProps) => {
             time,
             service,
         };
+
+        const { error } = await supabase.from('reservations').insert({
+            name,
+            email,
+            phone,
+            service,
+            appointment_date: date,
+            appointment_time: time,
+        });
+
+        if (error) {
+            setNotification('Reservation could not be saved. Please try again.');
+            return;
+        }
+
         onSubmit?.(reservation);
-        localStorage.setItem('reservation', JSON.stringify(reservation));
         const whatsappMessage = [
             'Halo Titis Beauty Aesthetic, saya ingin melakukan reservasi.',
             '',
@@ -56,7 +82,7 @@ const ReservationForm = ({ onSubmit }: ReservationFormProps) => {
             `Jam: ${time}`,
         ].join('\n');
         window.open(`https://wa.me/6285175089198?text=${encodeURIComponent(whatsappMessage)}`, '_blank', 'noopener,noreferrer');
-        window.dispatchEvent(new CustomEvent('reservation-created'));
+        window.dispatchEvent(new CustomEvent('reservation-created', { detail: reservation }));
         playNotificationTone();
         setNotification('Reservation sent. WhatsApp is ready for confirmation.');
         window.setTimeout(() => setNotification(''), 5000);
@@ -159,15 +185,9 @@ const ReservationForm = ({ onSubmit }: ReservationFormProps) => {
                         required
                     >
                         <option value="">Select a service</option>
-                        <option value="Cleanser Milk">Cleanser Milk</option>
-                        <option value="Steamer">Steamer</option>
-                        <option value="Ekstrasi Komedo">Ekstrasi Komedo</option>
-                        <option value="Massage">Massage</option>
-                        <option value="Facial Wash">Facial Wash</option>
-                        <option value="Serum">Serum</option>
-                        <option value="Uap Dingin">Uap Dingin</option>
-                        <option value="Masker Wajah">Masker Wajah</option>
-                        <option value="Oxygen">Oxygen</option>
+                        {services.map((availableService) => (
+                            <option key={availableService.id} value={availableService.name}>{availableService.name}</option>
+                        ))}
                     </select>
                 </div>
                 <button type="submit">Request appointment <span aria-hidden="true">&#8599;</span></button>

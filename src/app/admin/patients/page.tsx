@@ -3,6 +3,7 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import AdminShell from '@/components/AdminShell';
 import { Patient } from '@/types/admin';
+import { supabase } from '@/lib/supabase/client';
 
 const PatientsPage = () => {
     const [patients, setPatients] = useState<Patient[]>([]);
@@ -10,21 +11,26 @@ const PatientsPage = () => {
     const [form, setForm] = useState({ name: '', contact: '', email: '' });
 
     useEffect(() => {
-        const storedPatients: Patient[] = JSON.parse(localStorage.getItem('patients') || '[]');
-        setPatients(storedPatients);
+        const loadPatients = async () => {
+            const { data } = await supabase.from('patients').select('id, name, contact, email').order('created_at', { ascending: false });
+            setPatients((data || []) as Patient[]);
+        };
+
+        void loadPatients();
     }, []);
 
-    const savePatients = (nextPatients: Patient[]) => {
+    const savePatients = async (nextPatients: Patient[]) => {
         setPatients(nextPatients);
-        localStorage.setItem('patients', JSON.stringify(nextPatients));
     };
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        const nextPatient = { id: editingId || `PT-${Date.now()}`, ...form };
+        await supabase.from('patients').upsert(nextPatient);
         const nextPatients = editingId
-            ? patients.map((patient) => patient.id === editingId ? { ...patient, ...form } : patient)
-            : [...patients, { id: `PT-${Date.now()}`, ...form }];
-        savePatients(nextPatients);
+            ? patients.map((patient) => patient.id === editingId ? nextPatient : patient)
+            : [nextPatient, ...patients];
+        await savePatients(nextPatients);
         setForm({ name: '', contact: '', email: '' });
         setEditingId(null);
     };
@@ -34,8 +40,9 @@ const PatientsPage = () => {
         setForm({ name: patient.name, contact: patient.contact, email: patient.email || '' });
     };
 
-    const handleDeletePatient = (id: string) => {
-        savePatients(patients.filter((patient) => patient.id !== id));
+    const handleDeletePatient = async (id: string) => {
+        await supabase.from('patients').delete().eq('id', id);
+        await savePatients(patients.filter((patient) => patient.id !== id));
     };
 
     return (

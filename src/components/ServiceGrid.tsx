@@ -1,8 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import { services } from '../data/services';
+import { getServices } from '@/lib/services';
 
-const ServiceGrid = () => {
+const ServiceGrid = async () => {
+    const services = await getServices();
+
     return (
         <div className="service-grid">
             {services.map((service) => (

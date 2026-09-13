@@ -2,17 +2,26 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import { services } from '../../../data/services';
 import ServiceDetail from '../../../components/ServiceDetail';
+import { supabase } from '@/lib/supabase/client';
+import { ServiceRecord } from '@/lib/services';
 
 const ServicePage = () => {
     const { slug } = useParams();
-    const [service, setService] = useState<(typeof services)[number] | null>(null);
+    const [service, setService] = useState<ServiceRecord | null>(null);
 
     useEffect(() => {
         if (slug) {
-            const foundService = services.find((s) => String(s.id) === String(slug));
-            setService(foundService ?? null);
+            const loadService = async () => {
+                const { data } = await supabase
+                    .from('services')
+                    .select('id, name, description, image, price')
+                    .eq('id', String(slug))
+                    .maybeSingle();
+                setService((data as ServiceRecord | null) ?? null);
+            };
+
+            void loadService();
         }
     }, [slug]);
 

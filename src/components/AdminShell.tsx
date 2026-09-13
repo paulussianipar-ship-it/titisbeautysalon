@@ -2,7 +2,9 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React from 'react';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+import { supabase } from '@/lib/supabase/client';
 
 const links = [
     { href: '/admin', label: 'Overview' },
@@ -13,6 +15,30 @@ const links = [
 
 const AdminShell = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname();
+    const router = useRouter();
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const checkSession = async () => {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                router.replace('/admin/login');
+                return;
+            }
+            setIsLoading(false);
+        };
+
+        void checkSession();
+    }, [router]);
+
+    const handleSignOut = async () => {
+        await supabase.auth.signOut();
+        router.replace('/admin/login');
+    };
+
+    if (isLoading) {
+        return <div className="admin-shell" aria-busy="true" />;
+    }
 
     return (
         <div className="admin-shell">
@@ -28,6 +54,7 @@ const AdminShell = ({ children }: { children: React.ReactNode }) => {
                     ))}
                 </nav>
                 <Link href="/" className="admin-back-link">Back to website <span aria-hidden="true">&#8599;</span></Link>
+                <button type="button" className="admin-back-link" onClick={handleSignOut}>Sign out</button>
             </aside>
             <main className="admin-main">{children}</main>
         </div>

@@ -4,15 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import AdminShell from '@/components/AdminShell';
 import { Patient, Sale, StaffMember } from '@/types/admin';
-
-const readData = <T,>(key: string, fallback: T): T => {
-    if (typeof window === 'undefined') return fallback;
-    try {
-        return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback)) as T;
-    } catch {
-        return fallback;
-    }
-};
+import { supabase } from '@/lib/supabase/client';
 
 export default function AdminOverview() {
     const [patients, setPatients] = useState<Patient[]>([]);
@@ -20,9 +12,25 @@ export default function AdminOverview() {
     const [sales, setSales] = useState<Sale[]>([]);
 
     useEffect(() => {
-        setPatients(readData('patients', []));
-        setStaff(readData('staff', []));
-        setSales(readData('sales', []));
+        const loadOverview = async () => {
+            const [{ data: patientRows }, { data: staffRows }, { data: saleRows }] = await Promise.all([
+                supabase.from('patients').select('id, name, contact, email').order('created_at', { ascending: false }),
+                supabase.from('staff').select('id, name, position, contact').order('created_at', { ascending: false }),
+                supabase.from('sales').select('id, sale_date, service, customer, amount').order('sale_date', { ascending: false }),
+            ]);
+
+            setPatients((patientRows || []) as Patient[]);
+            setStaff((staffRows || []) as StaffMember[]);
+            setSales((saleRows || []).map((sale) => ({
+                id: sale.id,
+                date: sale.sale_date,
+                service: sale.service,
+                customer: sale.customer,
+                amount: sale.amount,
+            })) as Sale[]);
+        };
+
+        void loadOverview();
     }, []);
 
     const revenue = sales.reduce((total, sale) => total + Number(sale.amount || 0), 0);

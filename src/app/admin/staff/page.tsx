@@ -3,6 +3,7 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import AdminShell from '@/components/AdminShell';
 import { StaffMember } from '@/types/admin';
+import { supabase } from '@/lib/supabase/client';
 
 const StaffPage = () => {
     const [staff, setStaff] = useState<StaffMember[]>([]);
@@ -10,26 +11,33 @@ const StaffPage = () => {
     const [form, setForm] = useState({ name: '', position: '', contact: '' });
 
     useEffect(() => {
-        setStaff(JSON.parse(localStorage.getItem('staff') || '[]'));
+        const loadStaff = async () => {
+            const { data } = await supabase.from('staff').select('id, name, position, contact').order('created_at', { ascending: false });
+            setStaff((data || []) as StaffMember[]);
+        };
+
+        void loadStaff();
     }, []);
 
-    const saveStaff = (nextStaff: StaffMember[]) => {
+    const saveStaff = async (nextStaff: StaffMember[]) => {
         setStaff(nextStaff);
-        localStorage.setItem('staff', JSON.stringify(nextStaff));
     };
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        const nextMember = { id: editingId || `ST-${Date.now()}`, ...form };
+        await supabase.from('staff').upsert(nextMember);
         const nextStaff = editingId
-            ? staff.map((member) => member.id === editingId ? { ...member, ...form } : member)
-            : [...staff, { id: `ST-${Date.now()}`, ...form }];
-        saveStaff(nextStaff);
+            ? staff.map((member) => member.id === editingId ? nextMember : member)
+            : [nextMember, ...staff];
+        await saveStaff(nextStaff);
         setForm({ name: '', position: '', contact: '' });
         setEditingId(null);
     };
 
-    const handleDelete = (id: string) => {
-        saveStaff(staff.filter((member) => member.id !== id));
+    const handleDelete = async (id: string) => {
+        await supabase.from('staff').delete().eq('id', id);
+        await saveStaff(staff.filter((member) => member.id !== id));
     };
 
     return (

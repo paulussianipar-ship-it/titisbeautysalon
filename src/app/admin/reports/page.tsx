@@ -5,6 +5,7 @@ import * as XLSX from 'xlsx';
 import { jsPDF } from 'jspdf';
 import AdminShell from '@/components/AdminShell';
 import { Sale } from '@/types/admin';
+import { supabase } from '@/lib/supabase/client';
 
 const emptyForm = { date: new Date().toISOString().slice(0, 10), service: '', customer: '', amount: '' };
 
@@ -13,22 +14,42 @@ export default function ReportsPage() {
     const [form, setForm] = useState(emptyForm);
 
     useEffect(() => {
-        setSales(JSON.parse(localStorage.getItem('sales') || '[]'));
+        const loadSales = async () => {
+            const { data } = await supabase.from('sales').select('id, sale_date, service, customer, amount').order('sale_date', { ascending: false });
+            setSales((data || []).map((sale) => ({
+                id: sale.id,
+                date: sale.sale_date,
+                service: sale.service,
+                customer: sale.customer,
+                amount: sale.amount,
+            })) as Sale[]);
+        };
+
+        void loadSales();
     }, []);
 
     const saveSales = (nextSales: Sale[]) => {
         setSales(nextSales);
-        localStorage.setItem('sales', JSON.stringify(nextSales));
     };
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const sale: Sale = { id: `SALE-${Date.now()}`, date: form.date, service: form.service, customer: form.customer, amount: Number(form.amount) };
+        await supabase.from('sales').insert({
+            id: sale.id,
+            sale_date: sale.date,
+            service: sale.service,
+            customer: sale.customer,
+            amount: sale.amount,
+        });
         saveSales([sale, ...sales]);
         setForm(emptyForm);
     };
 
-    const removeSale = (id: string) => saveSales(sales.filter((sale) => sale.id !== id));
+    const removeSale = async (id: string) => {
+        await supabase.from('sales').delete().eq('id', id);
+        saveSales(sales.filter((sale) => sale.id !== id));
+    };
     const revenue = sales.reduce((total, sale) => total + sale.amount, 0);
     const average = sales.length ? revenue / sales.length : 0;
 

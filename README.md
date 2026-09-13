@@ -37,6 +37,21 @@ Welcome to the Titis Beauty Salon web application! This project is designed to p
    npm run dev
    ```
 
+## Supabase setup
+
+The project includes the database schema in `supabase/migrations` and test records in `supabase/seed.sql`.
+
+1. Install or run the Supabase CLI:
+   ```
+   npx supabase@latest login
+   npx supabase@latest link --project-ref tuarfpghygfgvihwfrsy
+   npx supabase@latest db push
+   ```
+2. Open the Supabase SQL Editor and run `supabase/seed.sql` to insert test services, patients, staff, sales, and reservations.
+3. Start the app with `npm run dev`.
+
+The public Supabase URL and publishable key belong in `.env` or `.env.local`. Never expose the service-role key in browser code. Create an admin user in Supabase Authentication before signing in; admin tables require an authenticated Supabase session.
+
 ## Directory Structure
 
 - `src/app`: Contains all the application pages and components.

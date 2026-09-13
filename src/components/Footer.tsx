@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 const Footer = () => {
     return (
@@ -17,6 +18,7 @@ const Footer = () => {
             <div className="footer-bottom section-shell">
                 <span>&copy; {new Date().getFullYear()} Titis Beauty Salon</span>
                 <span>Beauty, with intention.</span>
+                <Link href="/admin/login" className="footer-admin-login">Admin login <span aria-hidden="true">&#8599;</span></Link>
             </div>
         </footer>
     );
