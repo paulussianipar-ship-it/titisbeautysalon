@@ -52,6 +52,22 @@ The project includes the database schema in `supabase/migrations` and test recor
 
 The public Supabase URL and publishable key belong in `.env` or `.env.local`. Never expose the service-role key in browser code. Create an admin user in Supabase Authentication before signing in; admin tables require an authenticated Supabase session.
 
+## Vercel deployment
+
+This is a Next.js deployment and does not generate a `dist` directory. In Vercel Project Settings use:
+
+- Framework Preset: `Next.js`
+- Build Command: `npm run build`
+- Output Directory: leave empty (Vercel handles `.next` automatically)
+- Install Command: `npm install`
+
+Add these Environment Variables in Vercel for Production, Preview, and Development:
+
+```text
+NEXT_PUBLIC_SUPABASE_URL=https://your-project-ref.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
+```
+
 ## Directory Structure
 
 - `src/app`: Contains all the application pages and components.
