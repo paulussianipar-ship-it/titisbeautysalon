@@ -1,0 +1,35 @@
+{
+  "name": "titis-beauty-salon",
+  "version": "1.0.0",
+  "description": "A premium beauty salon website for Titis Beauty Salon.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "jspdf": "^4.2.1",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/node": "26.5.1",
+    "@types/react": "19.3.0",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "typescript": "latest"
+  },
+  "keywords": [
+    "beauty",
+    "salon",
+    "spa",
+    "nextjs",
+    "react"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
