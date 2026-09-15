@@ -15,235 +15,168 @@ const Footer: React.FC = () => {
 
     return (
         <footer className="site-footer" role="contentinfo">
-            {/* Ambient Red Glow Effects */}
-            <div className="footer-ambient-glow" aria-hidden="true" />
-            
             <div className="footer-container section-shell">
-                {/* Pre-Footer Action Banner */}
-                <div className="footer-cta-banner">
-                    <div className="footer-cta-content">
-                        <span className="footer-cta-eyebrow">
-                            <span className="footer-pulse-dot" aria-hidden="true" />
-                            KONSULTASI & RESERVASI KULIT
-                        </span>
-                        <h2 className="footer-cta-title">
-                            Siap Dapatkan Kulit Glowing & Sehat Impian Anda?
-                        </h2>
-                        <p className="footer-cta-desc">
-                            Konsultasikan keluhan kulitmu langsung bersama terapis & ahli estetika kami di Titis Beauty Aesthetic.
-                        </p>
-                    </div>
-                    <div className="footer-cta-actions">
-                        <Link href="/reservation" className="footer-btn-primary">
-                            <span>Booking Sekarang</span>
-                            <span aria-hidden="true" className="footer-btn-arrow">&#8599;</span>
-                        </Link>
-                        <a 
-                            href="https://wa.me/6285175089198?text=Halo%20Titis%20Beauty%20Aesthetic%2C%20saya%20ingin%20konsultasi%20jadwal%20dan%20treatment" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="footer-btn-whatsapp"
-                        >
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-                            </svg>
-                            <span>Chat WhatsApp</span>
-                        </a>
-                    </div>
-                </div>
-
-                {/* 4-Column Main Footer Grid */}
+                {/* 4-Column Main Grid matching reference model */}
                 <div className="footer-grid">
-                    {/* Column 1: Brand & Identity */}
+                    {/* Column 1: Brand Script Logo, Tagline & Social Icons */}
                     <div className="footer-col footer-col-brand">
-                        <Link href="/" className="footer-brand" aria-label="Titis Beauty Aesthetic">
-                            <img 
-                                src="/images/titislogo.jpg" 
-                                alt="Titis Beauty Aesthetic Logo" 
-                                className="footer-brand-logo" 
-                                width="1462" 
-                                height="886" 
-                            />
-                            <div className="footer-brand-text">
-                                <strong>TITIS</strong>
-                                <small>Beauty Aesthetic</small>
-                            </div>
+                        <Link href="/" className="footer-script-logo" aria-label="Titis Beauty">
+                            Titis Beauty
                         </Link>
-                        <p className="footer-brand-tagline">
-                            Klinik estetika & perawatan kecantikan terpercaya di Bekasi dengan sentuhan modern, higienis, dan berstandar medis untuk kulit sehat bercahaya alami.
+                        <p className="footer-tagline">
+                            Enhancing your beauty, one touch at a time. A luxury studio for glowing skin, hair wellness and care.
                         </p>
-                        
-                        {/* Social / Contact Badges */}
-                        <div className="footer-social-links">
-                            <a 
-                                href="https://wa.me/6285175089198" 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                className="footer-social-badge"
-                                aria-label="WhatsApp Titis"
+
+                        <div className="footer-social-row">
+                            <a
+                                href="https://www.instagram.com/titisbeautyaesthetic"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="footer-social-circle"
+                                aria-label="Instagram"
                             >
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                                 </svg>
-                                <span>0851-7508-9198</span>
                             </a>
-                            <a 
-                                href="https://www.instagram.com/" 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                className="footer-social-badge"
-                                aria-label="Instagram Titis"
+                            <a
+                                href="https://www.facebook.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="footer-social-circle"
+                                aria-label="Facebook"
                             >
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
                                 </svg>
-                                <span>@titisbeautysalon</span>
+                            </a>
+                            <a
+                                href="https://www.tiktok.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="footer-social-circle"
+                                aria-label="TikTok"
+                            >
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+                                </svg>
+                            </a>
+                            <a
+                                href="https://wa.me/6285175089198"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="footer-social-circle"
+                                aria-label="WhatsApp"
+                            >
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                                </svg>
                             </a>
                         </div>
                     </div>
 
-                    {/* Column 2: Quick Navigation */}
-                    <div className="footer-col">
-                        <h3 className="footer-heading">
-                            <span>Eksplorasi</span>
-                        </h3>
-                        <ul className="footer-links">
+                    {/* Column 2: Services */}
+                    <div className="footer-col footer-col-services">
+                        <h3 className="footer-heading">Services</h3>
+                        <ul className="footer-clean-list">
                             <li>
-                                <Link href="/" className="footer-link">
-                                    <span>Beranda</span>
-                                </Link>
+                                <Link href="/services/facial-brightening">Facial Brightening</Link>
                             </li>
                             <li>
-                                <Link href="/treatment" className="footer-link">
-                                    <span>Layanan Treatment</span>
-                                </Link>
+                                <Link href="/services/facial-agne">Facial Agne</Link>
                             </li>
                             <li>
-                                <Link href="/about" className="footer-link">
-                                    <span>Tentang Kami</span>
-                                </Link>
+                                <Link href="/services/facial-hydra-dermabration">Facial Hydra Dermabration</Link>
                             </li>
                             <li>
-                                <Link href="/reservation" className="footer-link">
-                                    <span>Booking Reservasi</span>
-                                </Link>
+                                <Link href="/services/rf-radiofrequency">RF (RadioFrequency)</Link>
                             </li>
                             <li>
-                                <Link href="/contact" className="footer-link">
-                                    <span>Kontak & Lokasi</span>
-                                </Link>
+                                <Link href="/services/massage-wajah">Massage Wajah</Link>
+                            </li>
+                            <li>
+                                <Link href="/services/potong-rambut-wanita">Potong Rambut (Wanita)</Link>
+                            </li>
+                            <li>
+                                <Link href="/services/creambath">Creambath</Link>
+                            </li>
+                            <li>
+                                <Link href="/services/cuci-rambut-catok-blow">Cuci Rambut + Catok/Blow</Link>
                             </li>
                         </ul>
                     </div>
 
-                    {/* Column 3: Treatment Populer */}
-                    <div className="footer-col">
-                        <h3 className="footer-heading">
-                            <span>Treatment Populer</span>
-                        </h3>
-                        <ul className="footer-links">
-                            <li>
-                                <Link href="/services/facial-brightening" className="footer-link">
-                                    <span>Facial Brightening</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/services/facial-agne" className="footer-link">
-                                    <span>Facial Agne</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/services/facial-hydra-dermabration" className="footer-link">
-                                    <span>Facial Hydra Dermabration</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/services/rf-radiofrequency" className="footer-link">
-                                    <span>RF (RadioFrequency)</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/services/creambath" className="footer-link">
-                                    <span>Creambath & Hair Spa</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/treatment" className="footer-link footer-link-all">
-                                    <span>Lihat Semua Layanan &rarr;</span>
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-
-                    {/* Column 4: Alamat & Jam Buka */}
-                    <div className="footer-col footer-col-info">
-                        <h3 className="footer-heading">
-                            <span>Kunjungi Klinik</span>
-                        </h3>
-                        
-                        <div className="footer-info-card">
-                            <div className="footer-info-row">
-                                <span className="footer-info-icon" aria-hidden="true">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                        <circle cx="12" cy="10" r="3"/>
+                    {/* Column 3: Visit */}
+                    <div className="footer-col footer-col-visit">
+                        <h3 className="footer-heading">Visit</h3>
+                        <div className="footer-visit-group">
+                            <div className="footer-visit-row">
+                                <span className="footer-visit-icon" aria-hidden="true">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                        <circle cx="12" cy="10" r="3" />
                                     </svg>
                                 </span>
-                                <div className="footer-info-text">
-                                    <p className="footer-address">
-                                        Jl. H. Abdullah No. 77, RT 02 / RW 02, Jatikramat, Kec. Jatiasih, Kota Bekasi, Jawa Barat 17421
-                                    </p>
+                                <div className="footer-visit-desc">
+                                    Jl. H. Abdullah No. 77, Jatikramat, Kec. Jatiasih, Kota Bekasi
                                 </div>
                             </div>
 
-                            <div className="footer-info-row">
-                                <span className="footer-info-icon" aria-hidden="true">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <polyline points="12 6 12 12 16 14"/>
+                            <div className="footer-visit-row">
+                                <span className="footer-visit-icon" aria-hidden="true">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                                     </svg>
                                 </span>
-                                <div className="footer-info-text">
-                                    <p className="footer-hours">
-                                        <strong>Senin &ndash; Minggu</strong><br />
-                                        09.00 &ndash; 20.00 WIB
-                                    </p>
-                                    <span className="footer-status-tag">
-                                        <span className="footer-status-dot" aria-hidden="true" />
-                                        Buka Setiap Hari
-                                    </span>
+                                <div className="footer-visit-desc">
+                                    <a href="tel:+6285175089198">+62 851 7508 9198</a>
                                 </div>
                             </div>
 
-                            <a 
-                                href="https://www.google.com/maps/search/?api=1&query=titis+beauty+aesthetic" 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                className="footer-maps-btn"
-                            >
-                                <span>Petunjuk Arah Google Maps</span>
-                                <span aria-hidden="true">&#8599;</span>
-                            </a>
+                            <div className="footer-visit-row">
+                                <span className="footer-visit-icon" aria-hidden="true">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <polyline points="12 6 12 12 16 14" />
+                                    </svg>
+                                </span>
+                                <div className="footer-visit-desc">
+                                    Mon – Sun, 9:00 AM – 8:00 PM
+                                </div>
+                            </div>
                         </div>
+                    </div>
+
+                    {/* Column 4: Book Now */}
+                    <div className="footer-col footer-col-book">
+                        <h3 className="footer-heading">Book Now</h3>
+                        <p className="footer-book-desc">
+                            Ready to feel beautiful? Reach out on WhatsApp.
+                        </p>
+                        <a
+                            href="https://wa.me/6285175089198?text=Halo%20Titis%20Beauty%20Aesthetic%2C%20saya%20ingin%20konsultasi%20jadwal%20dan%20treatment"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="footer-chat-btn"
+                        >
+                            Chat on WhatsApp
+                        </a>
                     </div>
                 </div>
             </div>
 
-            {/* Footer Bottom Bar */}
+            {/* Subtle Divider & Bottom Bar */}
             <div className="footer-bottom-bar">
                 <div className="footer-bottom-inner section-shell">
-                    <p className="footer-copy">
-                        &copy; {currentYear} <strong>Titis Beauty Aesthetic</strong>. Seluruh hak cipta dilindungi.
+                    <p className="footer-copyright">
+                        &copy; {currentYear} Titis Beauty. All rights reserved.
                     </p>
-                    <p className="footer-motto">
-                        Beauty & Confidence, Crafted with Care.
-                    </p>
-                    <div className="footer-admin-wrap">
-                        <Link href="/admin/login" className="footer-admin-btn">
-                            <span>Admin Portal</span>
-                            <span aria-hidden="true">&#8599;</span>
+                    <div className="footer-crafted-wrap">
+                        <span className="footer-crafted-text">Crafted with care in Bekasi</span>
+                        <Link href="/admin/login" className="footer-admin-link">
+                            Admin
                         </Link>
                     </div>
                 </div>
