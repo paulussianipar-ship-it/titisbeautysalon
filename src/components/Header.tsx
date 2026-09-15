@@ -90,8 +90,8 @@ const Header: React.FC = () => {
 
     const navLinks = [
         { href: '/', label: 'Home' },
-        { href: '/treatment', label: 'Treatment', aliases: ['/services'] },
         { href: '/about', label: 'About' },
+        { href: '/treatment', label: 'Treatment', aliases: ['/services'] },
         { href: '/contact', label: 'Contact' },
     ];
 
