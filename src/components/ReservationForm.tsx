@@ -1,8 +1,9 @@
 'use client';
 
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase/client';
 import { ServiceRecord } from '@/lib/services';
+import { services as defaultServices } from '@/data/services';
 
 type ReservationFormData = { name: string; email: string; phone: string; date: string; time: string; service: string };
 type ReservationFormProps = { onSubmit?: (data: ReservationFormData) => void };
@@ -36,10 +37,24 @@ const ReservationForm = ({ onSubmit }: ReservationFormProps) => {
     const [services, setServices] = useState<ServiceRecord[]>([]);
     const [notification, setNotification] = useState('');
 
-    React.useEffect(() => {
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const urlParams = new URLSearchParams(window.location.search);
+            const prefill = urlParams.get('service');
+            if (prefill) {
+                setService(prefill);
+            }
+        }
+
         const loadServices = async () => {
-            const { data } = await supabase.from('services').select('id, name, description, image, price').order('id');
-            setServices((data || []) as ServiceRecord[]);
+            try {
+                const { data } = await supabase.from('services').select('id, name, description, image, price').order('id');
+                if (data && data.length > 0) {
+                    setServices(data as ServiceRecord[]);
+                }
+            } catch (err) {
+                console.warn('Could not load services from Supabase, using default services:', err);
+            }
         };
 
         void loadServices();
@@ -184,10 +199,21 @@ const ReservationForm = ({ onSubmit }: ReservationFormProps) => {
                         onChange={(e) => setService(e.target.value)}
                         required
                     >
-                        <option value="">Select a service</option>
-                        {services.map((availableService) => (
-                            <option key={availableService.id} value={availableService.name}>{availableService.name}</option>
-                        ))}
+                        <option value="">Pilih Layanan Perawatan</option>
+                        <optgroup label="1. Facial Treatment">
+                            {defaultServices.filter(s => s.category === 'Facial Treatment').map((item) => (
+                                <option key={item.id} value={item.name}>
+                                    {item.code}. {item.name} (Rp {item.price.toLocaleString('id-ID')})
+                                </option>
+                            ))}
+                        </optgroup>
+                        <optgroup label="2. Hair Treatment">
+                            {defaultServices.filter(s => s.category === 'Hair Treatment').map((item) => (
+                                <option key={item.id} value={item.name}>
+                                    {item.code}. {item.name} (Rp {item.price.toLocaleString('id-ID')})
+                                </option>
+                            ))}
+                        </optgroup>
                     </select>
                 </div>
                 <button type="submit">Request appointment <span aria-hidden="true">&#8599;</span></button>

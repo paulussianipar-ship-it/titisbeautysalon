@@ -1,10 +1,39 @@
 import React from 'react';
 import ServiceGrid from '@/components/ServiceGrid';
+
+export const metadata = {
+    title: 'Treatment Kami | Titis Beauty Aesthetic',
+    description: 'Daftar lengkap perawatan estetika wajah (Facial Treatment) dan perawatan rambut (Hair Treatment) di Titis Beauty Aesthetic Bekasi.',
+};
+
 const ServicesPage = () => {
     return (
         <div className="services-page">
-            <section className="inner-hero services-hero"><div className="section-shell"><p className="eyebrow">Treatments by Titis</p><h1>Small rituals,<br /><em>beautiful results.</em></h1><p className="inner-hero-copy">Explore our edit of skin and body treatments, designed to leave you feeling refreshed, cared for, and completely yourself.</p></div></section>
-            <section className="services-list section-shell"><div className="section-heading"><div><p className="eyebrow">The treatment menu</p><h2>Choose your<br /><em>moment.</em></h2></div><p className="section-intro">Every service is delivered with attention, patience, and a little room to exhale.</p></div><ServiceGrid /></section>
+            <section className="treatment-page-hero">
+                <div className="section-shell">
+                    <span className="treatment-hero-pill-badge">MENU PERAWATAN EKSKLUSIF</span>
+                    <h1>Treatment Kami</h1>
+                    <p>
+                        Pilihan lengkap ritual perawatan kulit wajah dan mahkota rambut profesional yang dirancang khusus untuk memancarkan pesona terbaik Anda.
+                    </p>
+                    <div className="treatment-hero-category-chips">
+                        <a href="#facial-treatment" className="hero-cat-chip">
+                            <span className="chip-bullet">01</span>
+                            <strong>Facial Treatment</strong>
+                            <span className="chip-badge">5 Menu</span>
+                        </a>
+                        <a href="#hair-treatment" className="hero-cat-chip">
+                            <span className="chip-bullet">02</span>
+                            <strong>Hair Treatment</strong>
+                            <span className="chip-badge">4 Menu</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section className="services-list section-shell">
+                <ServiceGrid variant="page" />
+            </section>
         </div>
     );
 };
