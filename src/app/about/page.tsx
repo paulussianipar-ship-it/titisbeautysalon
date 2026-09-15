@@ -4,22 +4,22 @@ const AboutPage = () => {
     return (
         <div className="about-page">
             <section className="page-hero about-hero">
-                <div className="section-shell">
-                    <h1>Tentang Kami</h1>
+                <div className="section-shell" style={{ marginTop: '120px' }}>
+                    <h2>Tentang Kami</h2>
                     <p className="page-hero-subtitle">Komitmen dan perjalanan Titis Beauty Salon dalam menyediakan solusi kecantikan tepercaya, aman, dan berkualitas untuk Anda.</p>
                 </div>
             </section>
             <section className="about-gallery-section section-shell" aria-label="Suasana Titis Beauty Salon">
                 <div className="about-gallery about-gallery-desktop">
-                    <div className="about-img-wrap"><img src="/images/titislogo.jpg" alt="Titis Beauty Salon" loading="lazy" /></div>
-                    <div className="about-img-wrap"><img src="/images/facialsteamer.jpeg" alt="Perawatan wajah di Titis Beauty Salon" loading="lazy" /></div>
-                    <div className="about-img-wrap"><img src="/images/facialmassage.jpeg" alt="Perawatan massage di Titis Beauty Salon" loading="lazy" /></div>
+                    <div className="about-img-wrap"><img src="/images/alat1.jpeg" alt="Peralatan treatment modern di Titis Beauty Salon" loading="lazy" /></div>
+                    <div className="about-img-wrap"><img src="/images/ruangan.jpeg" alt="Ruangan perawatan Titis Beauty Salon" loading="lazy" /></div>
+                    <div className="about-img-wrap"><img src="/images/penghargaan.jpeg" alt="Penghargaan dan sertifikasi Titis Beauty Salon" loading="lazy" /></div>
                 </div>
                 <div className="about-gallery-mobile">
                     <div className="about-gallery-track">
-                        <div className="about-img-wrap"><img src="/images/titislogo.jpg" alt="Titis Beauty Salon" loading="lazy" /></div>
-                        <div className="about-img-wrap"><img src="/images/facialsteamer.jpeg" alt="Perawatan wajah di Titis Beauty Salon" loading="lazy" /></div>
-                        <div className="about-img-wrap"><img src="/images/facialmassage.jpeg" alt="Perawatan massage di Titis Beauty Salon" loading="lazy" /></div>
+                        <div className="about-img-wrap"><img src="/images/alat1.jpeg" alt="Peralatan treatment modern di Titis Beauty Salon" loading="lazy" /></div>
+                        <div className="about-img-wrap"><img src="/images/ruangan.jpeg" alt="Ruangan perawatan Titis Beauty Salon" loading="lazy" /></div>
+                        <div className="about-img-wrap"><img src="/images/penghargaan.jpeg" alt="Penghargaan dan sertifikasi Titis Beauty Salon" loading="lazy" /></div>
                     </div>
                     <div className="about-gallery-pagination" aria-hidden="true"><span className="active" /><span /><span /></div>
                 </div>

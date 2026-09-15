@@ -7,7 +7,7 @@ const HomePage = () => {
     return (
         <div className="home-page">
             <HeroSlider />
-            <PremiumSection />
+            {/* <PremiumSection /> */}
             <section id="treatment-list" className="treatment-section">
                 <div className="container">
                     <div className="text-center mb-4">

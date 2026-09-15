@@ -33,19 +33,14 @@ const ReservationForm = ({ onSubmit }: ReservationFormProps) => {
     const [phone, setPhone] = useState('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
-    const [service, setService] = useState('');
+    const [service, setService] = useState(() => {
+        if (typeof window === 'undefined') return '';
+        return new URLSearchParams(window.location.search).get('service') || '';
+    });
     const [services, setServices] = useState<ServiceRecord[]>([]);
     const [notification, setNotification] = useState('');
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const urlParams = new URLSearchParams(window.location.search);
-            const prefill = urlParams.get('service');
-            if (prefill) {
-                setService(prefill);
-            }
-        }
-
         const loadServices = async () => {
             try {
                 const { data } = await supabase.from('services').select('id, name, description, image, price').order('id');

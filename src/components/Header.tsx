@@ -48,8 +48,12 @@ const Header: React.FC = () => {
 
     // Close mobile nav when pathname changes
     useEffect(() => {
-        setIsMobileNavOpen(false);
-        setShowNotifications(false);
+        const resetNavigation = window.setTimeout(() => {
+            setIsMobileNavOpen(false);
+            setShowNotifications(false);
+        }, 0);
+
+        return () => window.clearTimeout(resetNavigation);
     }, [pathname]);
 
     // Handle escape key and prevent body scroll when mobile nav is open

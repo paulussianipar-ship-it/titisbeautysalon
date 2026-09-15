@@ -1044,17 +1044,53 @@ img { display: block; max-width: 100%; }
 .about-hero h1 { font-size: clamp(52px, 7vw, 86px); letter-spacing: -.045em; }
 .page-hero-subtitle { max-width: 620px; margin: 24px 0 0; color: var(--muted); font-size: 16px; line-height: 1.7; }
 .about-gallery-section { padding-top: 72px; }
-.about-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.about-img-wrap { overflow: hidden; aspect-ratio: 1.18; background: var(--cream); }
-.about-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.about-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
+.about-img-wrap { 
+    overflow: hidden; 
+    aspect-ratio: 3 / 4; 
+    background: var(--cream); 
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+}
+.about-img-wrap img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    object-position: center;
+    transition: transform .5s ease; 
+}
 .about-img-wrap:hover img { transform: scale(1.04); }
 .about-gallery-mobile { display: none; }
-.about-story { padding-top: 86px; padding-bottom: 125px; }
-.about-intro-copy { max-width: 700px; }
-.about-intro-copy h2 { margin: 0 0 28px; font-family: 'Playfair Display', serif; font-size: clamp(36px, 4vw, 54px); font-weight: 500; letter-spacing: -.04em; line-height: 1.05; color: var(--primary); }
-.about-intro-label { display: flex; gap: 15px; color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-.section-index { color: var(--primary); }
-.about-intro-copy p { max-width: 520px; margin: 0 0 20px; color: var(--muted); font-size: 15px; }
+.about-story { 
+    padding-top: 60px; 
+    padding-bottom: 95px; 
+}
+.about-intro-copy { 
+    width: 100%; 
+    max-width: 100%; 
+}
+.about-intro-copy h2 { 
+    margin: 0 0 30px; 
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+    font-size: clamp(32px, 3.8vw, 44px); 
+    font-weight: 700; 
+    letter-spacing: -.02em; 
+    line-height: 1.15; 
+    color: #8f1e24; 
+    text-align: left; 
+}
+.about-intro-copy p { 
+    max-width: 100%; 
+    margin: 0 0 28px; 
+    color: #333333; 
+    font-size: 15.5px; 
+    line-height: 1.75; 
+    text-align: left; 
+}
+.about-intro-copy p:last-child { 
+    margin-bottom: 0; 
+}
 .about-values { padding: 95px 0 110px; background: var(--cream); }
 .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 50px; }
 .value-grid article { min-height: 220px; padding: 22px 0; border-top: 1px solid var(--primary-border); }
@@ -1105,12 +1141,17 @@ img { display: block; max-width: 100%; }
     .about-gallery-mobile { display: block; overflow: hidden; }
     .about-gallery-track { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
     .about-gallery-track::-webkit-scrollbar { display: none; }
-    .about-gallery-track .about-img-wrap { flex: 0 0 88%; aspect-ratio: 1.15; scroll-snap-align: start; }
+    .about-gallery-track .about-img-wrap { flex: 0 0 82%; aspect-ratio: 3 / 4; border-radius: 14px; scroll-snap-align: start; }
     .about-gallery-pagination { display: flex; justify-content: center; gap: 7px; margin-top: 18px; }
     .about-gallery-pagination span { width: 7px; height: 7px; border-radius: 50%; background: var(--primary-border); }
     .about-gallery-pagination span.active { background: var(--primary); }
     .about-story { padding-top: 58px; padding-bottom: 84px; }
-    .about-intro-copy { margin-top: 0; }
+    .about-story-center { max-width: 100%; }
+    .about-intro-copy { max-width: 100%; margin-top: 0; }
+    .about-intro-copy p { font-size: 15px; line-height: 1.75; }
+    .about-intro-copy .about-lead { font-size: 16.5px; }
+    .about-story-badges { gap: 12px; margin-top: 28px; }
+    .about-badge-card { padding: 14px 18px; min-width: 140px; flex: 1 1 calc(50% - 12px); }
     .about-values { padding: 75px 0 80px; }
     .value-grid { grid-template-columns: 1fr; gap: 0; margin-top: 35px; }
     .value-grid article { min-height: auto; padding: 20px 0 25px; }

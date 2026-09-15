@@ -27,7 +27,7 @@ const ServicePage = () => {
 
             try {
                 // Try querying Supabase by id
-                let { data, error } = await supabase
+                let { data } = await supabase
                     .from('services')
                     .select('id, name, description, image, price')
                     .eq('id', rawSlug)

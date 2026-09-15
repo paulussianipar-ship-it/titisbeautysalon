@@ -6,7 +6,7 @@ import { services as serviceData, ServiceItem } from '@/data/services';
 
 const ServiceGrid = ({ variant = 'home' }: { variant?: 'home' | 'page' }) => {
     const sliderRef = useRef<HTMLDivElement | null>(null);
-    const [isMounted, setIsMounted] = useState(false);
+    const [activeFilter, setActiveFilter] = useState<'all' | 'facial' | 'hair'>('all');
 
     // Refs for animation & drag (accelerated speed per user request)
     const NORMAL_SPEED = 2.4;
@@ -23,10 +23,6 @@ const ServiceGrid = ({ variant = 'home' }: { variant?: 'home' | 'page' }) => {
 
     // 3 identical sets of services to ensure seamless, infinite looping in both directions
     const carouselItems = [...serviceData, ...serviceData, ...serviceData];
-
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
 
     useEffect(() => {
         if (variant !== 'home') return;
@@ -168,8 +164,6 @@ const ServiceGrid = ({ variant = 'home' }: { variant?: 'home' | 'page' }) => {
     };
 
     if (variant === 'page') {
-        const [activeFilter, setActiveFilter] = useState<'all' | 'facial' | 'hair'>('all');
-
         const facialServices = serviceData.filter(s => s.category === 'Facial Treatment');
         const hairServices = serviceData.filter(s => s.category === 'Hair Treatment');
 
@@ -425,7 +419,7 @@ const ServiceGrid = ({ variant = 'home' }: { variant?: 'home' | 'page' }) => {
             </div>
 
             {/* Navigation arrows for accessibility & manual control */}
-            <div className="treatment-controls" aria-hidden={!isMounted}>
+            <div className="treatment-controls">
                 <button 
                     type="button" 
                     className="treatment-arrow-btn" 
