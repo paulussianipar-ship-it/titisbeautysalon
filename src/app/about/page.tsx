@@ -3,7 +3,7 @@ import React from 'react';
 const AboutPage = () => {
     return (
         <div className="about-page">
-            <section className="inner-hero about-hero"><div className="section-shell"><p className="eyebrow">About</p><h1>Titis Beauty<br /><em>Salon.</em></h1><p className="inner-hero-copy">Komitmen dan perjalanan Titis Beauty Salon dalam menyediakan solusi kecantikan tepercaya, aman, dan berkualitas untuk Anda.</p></div></section>
+            <section className="inner-hero about-hero"><div className="section-shell"><p className="eyebrow">Tentang kami</p><h1>Tentang<br /><em>Kami.</em></h1><p className="inner-hero-copy">Komitmen dan perjalanan Titis Beauty Salon dalam menyediakan solusi kecantikan tepercaya, aman, dan berkualitas untuk Anda.</p></div></section>
             <section className="about-story section-shell">
                 <div className="about-gallery" aria-label="Suasana Titis Beauty Salon">
                     <div className="about-img-wrap"><img src="/images/titislogo.jpg" alt="Titis Beauty Salon" loading="lazy" /></div>
@@ -18,7 +18,6 @@ const AboutPage = () => {
                     <p>Mencantikan seluruh Indonesia adalah misi utama kami, oleh karena itu kami menawarkan beragam treatment kecantikan yang didukung dengan teknologi mutakhir.</p>
                 </div>
             </section>
-            <section className="about-values"><div className="section-shell"><p className="eyebrow">Komitmen kami</p><div className="value-grid"><article><span>01</span><h3>Tepercaya</h3><p>Perawatan yang dilakukan dengan perhatian dan dedikasi.</p></article><article><span>02</span><h3>Aman</h3><p>Pengalaman kecantikan yang nyaman untuk setiap pelanggan.</p></article><article><span>03</span><h3>Berkualitas</h3><p>Treatment pilihan dengan dukungan tenaga ahli berpengalaman.</p></article></div></div></section>
         </div>
     );
 };
